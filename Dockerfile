@@ -11,7 +11,8 @@ RUN apk add --no-cache php5-fpm \
         php5-ctype \
         php5-openssl \
         php5-pdo \
-        php5-pdo_mysql 
+        php5-pdo_mysql \
+        php5-dom
 
 EXPOSE 9000
 
