@@ -18,9 +18,11 @@ RUN apk add --no-cache php5-fpm \
         php5-bz2
 
 EXPOSE 9000
+WORKDIR /var/www/html
 
 COPY conf/php5-fpm.conf /etc/php5/php-fpm.conf
 COPY conf/php5.ini /etc/php5/php.ini
 COPY conf/php5-cron /etc/crontabs/root
+COPY docker-start.sh /usr/bin/docker-start.sh
 
-CMD ["php-fpm5", "-F"]
+CMD ["sh","/usr/bin/docker-start.sh"]
