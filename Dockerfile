@@ -37,7 +37,7 @@ RUN docker-php-ext-install json \
         #openssl
 
 RUN docker-php-source delete
-COPY conf/php5-fpm.conf /usr/local/etc/php-fpm.d/www.conf
+# COPY conf/php5-fpm.conf /usr/local/etc/php-fpm.d/www.conf
 COPY conf/php5.ini /usr/local/etc/php/
 COPY conf/php5.ini /usr/local/etc/php/conf.d/php.ini
 
