@@ -1,7 +1,6 @@
 FROM php:5.6.31-fpm-alpine
 RUN docker-php-source extract
-RUN docker-php-ext-install 
-        fpm \
+RUN docker-php-ext-install
         json \
         mcrypt \
         mysql \
