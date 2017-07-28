@@ -15,6 +15,8 @@ RUN docker-php-ext-install
         pdo_mysql \
         dom \
         gd \
+        exif \
+        calendar \
         bz2
 
 RUN docker-php-source delete
