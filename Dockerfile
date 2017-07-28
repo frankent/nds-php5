@@ -32,6 +32,8 @@ RUN docker-php-ext-install json \
         dom \
         gd \
         bz2 \
+        exif \
+        calendar \
         zip
 
         #openssl
