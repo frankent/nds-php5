@@ -17,7 +17,6 @@ RUN apt-get install -y  autoconf \
                         libpng12-dev \
                         libcurl4-openssl-dev \
                         libssl-dev \
-                        libsslcommon2-dev \
                         pkg-config
 
 # RUN cp /usr/src/php/ext/zlib/config0.m4 /usr/src/php/ext/zlib/config.m4
