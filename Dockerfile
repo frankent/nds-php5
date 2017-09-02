@@ -14,7 +14,11 @@ RUN apt-get install -y  autoconf \
                         libbz2-dev \
                         libfreetype6-dev \
                         libjpeg62-turbo-dev \
-                        libpng12-dev
+                        libpng12-dev \
+                        libcurl4-openssl-dev \
+                        libssl-dev \
+                        libsslcommon2-dev \
+                        pkg-config
 
 # RUN cp /usr/src/php/ext/zlib/config0.m4 /usr/src/php/ext/zlib/config.m4
 RUN pecl channel-update pecl.php.net \
