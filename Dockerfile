@@ -4,6 +4,7 @@ RUN apt-get install -y  autoconf \
                         automake \
                         libtool \
                         m4 \
+                        openssl \
                         libmcrypt-dev \
                         libxml2-dev \
                         libcurl4-openssl-dev \
