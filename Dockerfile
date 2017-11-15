@@ -4,6 +4,7 @@ RUN apt-get install -y  autoconf \
                         automake \
                         libtool \
                         m4 \
+                        openssl \
                         libmcrypt-dev \
                         libxml2-dev \
                         libcurl4-openssl-dev \
@@ -17,11 +18,19 @@ RUN apt-get install -y  autoconf \
                         wget \
                         libthai0 \
                         xfonts-thai \
-                        gdebi-core
+                        gdebi-core \
+                        libcurl4-openssl-dev \
+                        libssl-dev \
+                        pkg-config
 
 # RUN cp /usr/src/php/ext/zlib/config0.m4 /usr/src/php/ext/zlib/config.m4
+RUN pecl channel-update pecl.php.net \
+        && pecl install mongodb \
+	&& pecl install redis
+	# && pecl install imagick
 
 RUN docker-php-source extract
+
 RUN docker-php-ext-install json \
         mcrypt \
         mysql \
@@ -36,9 +45,14 @@ RUN docker-php-ext-install json \
         dom \
         gd \
         bz2 \
+        exif \
+        calendar \
         zip
 
-        #openssl
+RUN docker-php-ext-enable mongodb \
+	&& docker-php-ext-enable redis \
+	# && docker-php-ext-enable imagick \
+	&& docker-php-source delete
 
 RUN docker-php-source delete
 # COPY conf/php5-fpm.conf /usr/local/etc/php-fpm.d/www.conf
