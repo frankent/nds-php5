@@ -13,7 +13,11 @@ RUN apt-get install -y  autoconf \
                         libbz2-dev \
                         libfreetype6-dev \
                         libjpeg62-turbo-dev \
-                        libpng12-dev
+                        libpng12-dev \
+                        wget \
+                        libthai0 \
+                        xfonts-thai \
+                        gdebi-core
 
 # RUN cp /usr/src/php/ext/zlib/config0.m4 /usr/src/php/ext/zlib/config.m4
 
@@ -40,6 +44,9 @@ RUN docker-php-source delete
 # COPY conf/php5-fpm.conf /usr/local/etc/php-fpm.d/www.conf
 COPY conf/php5.ini /usr/local/etc/php/
 COPY conf/php5.ini /usr/local/etc/php/conf.d/php.ini
+
+RUN cd /tmp && wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.2.1/wkhtmltox-0.12.2.1_linux-jessie-amd64.deb
+RUN gdebi wkhtmltox-0.12.2.1_linux-jessie-amd64.deb
 
 EXPOSE 9000
 WORKDIR /var/www/html
