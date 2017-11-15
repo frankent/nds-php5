@@ -59,8 +59,10 @@ RUN docker-php-source delete
 COPY conf/php5.ini /usr/local/etc/php/
 COPY conf/php5.ini /usr/local/etc/php/conf.d/php.ini
 
-RUN cd /tmp && wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.2.1/wkhtmltox-0.12.2.1_linux-jessie-amd64.deb
-RUN gdebi wkhtmltox-0.12.2.1_linux-jessie-amd64.deb
+RUN cd /tmp \
+        && wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.2.1/wkhtmltox-0.12.2.1_linux-jessie-amd64.deb \
+        && gdebi wkhtmltox-0.12.2.1_linux-jessie-amd64.deb \
+        && rm -rf /tmp/*
 
 EXPOSE 9000
 WORKDIR /var/www/html
