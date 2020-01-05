@@ -25,11 +25,12 @@ RUN apt-get install -y  --no-install-recommends \
                         libssl-dev \
                         pkg-config
 
-# RUN cp /usr/src/php/ext/zlib/config0.m4 /usr/src/php/ext/zlib/config.m4
-RUN pecl channel-update pecl.php.net \
-        && pecl install mongodb \
-	&& pecl install redis-2.2.8 \
-	&& pecl install imagick
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+
+RUN pecl channel-update pecl.php.net
+RUN pecl install mongodb
+RUN pecl install imagick
+RUN pecl install redis-2.2.8
 
 RUN docker-php-source extract
 
@@ -57,14 +58,15 @@ RUN docker-php-ext-enable mongodb \
 	&& docker-php-source delete
 
 RUN docker-php-source delete
-# COPY conf/php5-fpm.conf /usr/local/etc/php-fpm.d/www.conf
-COPY conf/php5.ini /usr/local/etc/php/
-COPY conf/php5.ini /usr/local/etc/php/conf.d/php.ini
 
-RUN cd /tmp \
-        && wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.2.1/wkhtmltox-0.12.2.1_linux-jessie-amd64.deb \
-        && gdebi --non-interactive wkhtmltox-0.12.2.1_linux-jessie-amd64.deb \
-        && rm -rf /tmp/*
+# COPY conf/php5-fpm.conf /usr/local/etc/php-fpm.d/www.conf
+# COPY conf/php5.ini /usr/local/etc/php/
+# COPY conf/php5.ini /usr/local/etc/php/conf.d/php.ini
+
+RUN cd /tmp
+RUN wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.2.1/wkhtmltox-0.12.2.1_linux-jessie-amd64.deb
+RUN gdebi --non-interactive wkhtmltox-0.12.2.1_linux-jessie-amd64.deb
+RUN rm -rf /tmp/*
 
 EXPOSE 9000
 WORKDIR /var/www/html

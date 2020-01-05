@@ -1,0 +1,61 @@
+FROM php:5-fpm-alpine
+RUN apt-get update
+RUN apt-get install -y  --no-install-recommends \
+                        autoconf \
+                        apt-utils \
+                        automake \
+                        libtool \
+                        m4 \
+                        openssl \
+                        libmcrypt-dev \
+                        libxml2-dev \
+                        libcurl4-openssl-dev \
+                        libvpx-dev \
+                        libjpeg-dev \
+                        libpng-dev \
+                        libbz2-dev \
+                        libfreetype6-dev \
+                        libjpeg62-turbo-dev \
+                        libmagickwand-dev \
+                        wget \
+                        libthai0 \
+                        xfonts-thai \
+                        gdebi-core \
+                        libcurl4-openssl-dev \
+                        libssl-dev \
+                        pkg-config
+
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+
+RUN pecl channel-update pecl.php.net
+RUN pecl install mongodb
+
+RUN docker-php-source extract
+
+RUN docker-php-ext-install json \
+        mcrypt \
+        mysql \
+        mysqli \
+        pdo \
+        pdo_mysql \
+        xml \
+        curl \
+        iconv \
+        gettext \
+        ctype \
+        dom \
+        gd \
+        bz2 \
+        exif \
+        calendar \
+        zip
+
+RUN docker-php-ext-enable mongodb
+RUN docker-php-source delete
+
+RUN docker-php-source delete
+
+EXPOSE 9000
+WORKDIR /var/www/html
+
+# CMD ["php-fpm", "-F"]
