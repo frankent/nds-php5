@@ -28,7 +28,7 @@ RUN apt-get install -y  --no-install-recommends \
 # RUN cp /usr/src/php/ext/zlib/config0.m4 /usr/src/php/ext/zlib/config.m4
 RUN pecl channel-update pecl.php.net \
         && pecl install mongodb \
-	&& pecl install redis \
+	&& pecl install redis-2.2.8 \
 	&& pecl install imagick
 
 RUN docker-php-source extract
