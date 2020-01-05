@@ -1,4 +1,4 @@
-FROM php:5-fpm-alpine
+FROM php:5-fpm
 RUN apt-get update
 RUN apt-get install -y  --no-install-recommends \
                         autoconf \
