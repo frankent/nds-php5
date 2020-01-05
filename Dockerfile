@@ -1,5 +1,5 @@
 FROM php:5-fpm
-RUN apt-get update && apt-get upgrade -y
+RUN apt-get update
 RUN apt-get install -y  --no-install-recommends \
                         autoconf \
                         apt-utils \
@@ -16,7 +16,6 @@ RUN apt-get install -y  --no-install-recommends \
                         libbz2-dev \
                         libfreetype6-dev \
                         libjpeg62-turbo-dev \
-                        libpng12-dev \
                         libmagickwand-dev \
                         wget \
                         libthai0 \
@@ -70,5 +69,4 @@ RUN cd /tmp \
 EXPOSE 9000
 WORKDIR /var/www/html
 
-
-CMD ["php-fpm", "-F"]
+# CMD ["php-fpm", "-F"]
